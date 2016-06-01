@@ -1,0 +1,80 @@
+.main {
+	min-height: 750px;
+}
+.descr {
+	width: 60%;
+	margin: 30px auto;
+}
+.contacts {
+	margin-top:50px;
+}
+
+.person {
+	height:400px;
+}
+
+.photo {
+	margin:55px auto;
+	width:200px;
+	height:200px;
+	border-radius:200px;
+}
+
+.malin {
+	background: url('devs/malin.jpg') 50% 50% no-repeat black;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+}
+
+.vika {
+	background: url('devs/vika.jpg') 50% 50% no-repeat black;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+}
+
+.dima {
+	background: url('devs/dima.jpg') 50% 50% no-repeat black;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+}
+
+.contacts .wrap {
+	width: 200px;
+	height: 200px;
+	background:#29aba4;
+	border-radius:200px;
+	opacity: 0.5;
+	-webkit-transition-duration: 0.4s;
+  	-moz-transition-duration: 0.4s;
+  	transition-duration: 0.4s;
+}
+
+.contacts .wrap:hover {
+	opacity:0;
+}
+
+.social {
+	text-align:center;
+}
+
+.social a {
+	margin:5px;
+	color:black;
+	-webkit-transition-duration: 0.4s;
+  	-moz-transition-duration: 0.4s;
+  	transition-duration: 0.4s;
+}
+
+.social a:hover, .social a:focus {
+	color: #29aba4;
+}
+.name {
+	font-family: 'Lobster';
+	text-align:center;
+	margin-top:-40px;
+	margin-bottom:10px;
+}
+

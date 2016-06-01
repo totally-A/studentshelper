@@ -1,0 +1,72 @@
+.theme {
+	background: #29aba4;
+	opacity:0.5;
+	margin:10px;
+	height:150px;
+	-webkit-transition-duration: 0.4s;
+  	-moz-transition-duration: 0.4s;
+  	transition-duration: 0.4s;
+}
+
+.theme:hover {
+	opacity:1;
+}
+
+.row {
+	margin:20px auto;
+}
+
+.sign {
+	margin-top:-160px;
+}
+
+.buttons {
+	width:350px;
+	margin:30px auto;
+}
+
+.button {
+	font-family: 'Oswald', sans-serif;
+	opacity:0.5;
+	background: #29aba4;
+	color: #f8f8f8;
+	padding:20px;
+	margin:10px;
+	text-decoration: none;
+	-webkit-transition-duration: 0.4s;
+  	-moz-transition-duration: 0.4s;
+  	transition-duration: 0.4s;
+}
+
+.test-btn {
+	font-family: 'Oswald', sans-serif;
+	opacity:0.5;
+	background: #29aba4;
+	color: #f8f8f8;
+	padding:15px 40px;
+	margin-left:80px;
+	text-decoration: none;
+	-webkit-transition-duration: 0.4s;
+  	-moz-transition-duration: 0.4s;
+  	transition-duration: 0.4s;
+}
+
+.button:hover, .test-btn:hover {
+	opacity:1;
+	color: #f8f8f8;
+	text-decoration: none;
+}
+
+.back-btn {
+	font-family: 'Oswald', sans-serif;
+	color: #29aba4;
+	text-decoration: none;
+} 
+
+.back-btn:hover{
+	color: #29aba4;
+}
+
+.back-btn i {
+	margin:5px;
+}

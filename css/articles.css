@@ -38,7 +38,7 @@
   	transition-duration: 0.4s;
 }
 
-.test-btn {
+.test-btn, .test-btn:active {
 	font-family: 'Oswald', sans-serif;
 	opacity:0.5;
 	background: #29aba4;
@@ -51,7 +51,7 @@
   	transition-duration: 0.4s;
 }
 
-.button:hover, .test-btn:hover {
+.button:hover, .test-btn:hover, .test-btn:focus {
 	opacity:1;
 	color: #f8f8f8;
 	text-decoration: none;
@@ -69,4 +69,40 @@
 
 .back-btn i {
 	margin:5px;
+}
+
+.info p {
+	text-indent: 1.5em;
+	margin:20px auto;
+	text-align:left;
+}
+
+pre {
+	text-align:left;
+	-moz-tab-size: 4;
+    -o-tab-size:   4;
+    tab-size:      4;
+}
+
+h3 {
+	color:#eb7260 !important;
+	text-align:left;
+}
+
+.main-info {
+	border:1px dashed #eb7260;
+	text-align:left;
+}
+
+.main-info li, .main-info li:hover {
+	color:#354458;
+	margin:20px 10px;
+}
+
+.example {
+	margin-top:30px;
+}
+
+.example h3 {
+	color:#354458 !important;
 }

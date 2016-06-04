@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student's Helper</title>
+	<title>Student's Helper: Директиви препроцесора</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/articles.css">
@@ -63,18 +63,177 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Директиви препроцесора
 				</h2>
+				<h3>Директива #include</h3>
+				<pre>#include </ * ім'я заголовку * /></pre>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					Директива #include вставляє код із зазначеного файлу в поточний файл, тобто, просто підключивши інший файл, ми можемо користуватися його функціями, класами, змінними. Заголовки зазвичай знаходяться або в поточній директорії, або в стандартному системному каталозі.<br/>
+Підключення заголовних файлів виконується під час компіляції, або як файл, який є частиною вашого проекту. Ця функція залежить від конкретної реалізації вашого компілятора.<br/>
+Якщо підключений файл не знайдений, процес компіляції завершується з помилкою.
 				</p>
+				<h3>Директива #define</h3>
+				<p>
+					Директива #define приймає дві форми:<br/>
+визначення констант;<br/>
+визначення макросів.<br/>
+визначення констант<br/>
+				</p>
+				<pre>#define nameToken value</pre>
+				<p>При використанні імені константи - nameToken, воно буде замінено значенням value, тобто, грубо кажучи - це та ж сама змінна, значення якої змінити не можна.</p>
+				<h3>Визначення параметрезованих макросів</h3>
+				<pre>#define nameMacros (arg1, arg2, ...) expression</pre>
+				<p>Наприклад визначимо макрос, який буде повертати максимальне з двох значень.</p>
+				<pre>#define MAX (num1, num2) ((num1)> (num2)? (num1): (num2))</pre>
+				<h3>Директива #undef</h3>
+				<p>Директива #undef перевизначає константу або препроцесорний макрос, раніше визначений за допомогою директиви #define.</p>
+				<pre>#undef nameToken</pre>
+				<p>Як правило, директива #undef використовуються для зняття, раніше визначеної константи або макросу в невеликій області програми. Це робиться для того, щоб для всієї програми, макроc або константа залишалися, а для деякої області, ці ж макрос або константа можуть бути перевизначені. Небезпечно було б у всій програмі перевизначати константу, але в короткий області, це порівняно безпечно. Директива #undef є єдиним способом створення цієї області, так як область дії макросів або констант діє від директиви #define до #undef.</p>
+				<h3>Директива #if</h3>
+				<pre>#if value
+// Код, який виконається, в разі, якщо value - істина
+#elsif value1
+// Цей код виконається, в разі, якщо value1 - істина
+#else
+// Код, який виконається в іншому випадку
+#endif
+</pre>
+				<p>Директива #if перевіряє, чи є значення value істиною і, якщо це так, то виконується код, який стоїть до закриття директиви #endif. В іншому випадку, код всередині #if НЕ компілюватиметься, він буде вилучений компілятором, але це не впливає на вихідний код.<br/>
+Зверніть увагу, що в #if можуть бути вкладені директиви #elsif і #else.
+</p>
+				<h3>Директива #ifdef</h3>
+				<pre>#ifdef nameToken
+// Код, який виконається, якщо nameToken визначено
+#else
+// Код, який виконається, якщо nameToken не визначений
+#endif
+</pre>
+				<p>Директива #ifdef перевіряє, чи був раніше визначений макрос або символічна константа як #define. Якщо - так, компілятор включає в програму код, який знаходиться між директивами #ifdef і #else, якщо nameToken раніше визначений не був, то виконується код між #else і #endif, або, якщо немає директиви #else, компілятор відразу переходить до # endif.</p>
+				<h3>Директива #ifndef</h3>
+				<pre>#ifndef nameToken
+// Код, який виконається, якщо nameToken не визначений
+#else
+// Код, який виконається, якщо nameToken визначено
+#endif
+</pre>
+				<p>Директива #ifndef перевіряє, чи був раніше визначений макрос або символічна константа як #define. Якщо - так, компілятор включає в програму код, який знаходиться між директивами #else і #endif, якщо nameToken раніше визначений не був, то виконується код між #ifndef і #else, або, якщо немає директиви #else, компілятор відразу переходить до #endif. Директива #ifndef може бути використана для підключення заголовних файлів. якщо вони не підключені, для цього використовувати символічну константу, як індикатор підключеного до проекту функціоналу.</p>
+				<h3>Директива #error</h3>
+				<pre>#error "Цей код не повинен компілюватися"</pre>
+				<p>Директива #error дозволяє відображати в списку помилок компіляції повідомлення, в разі виникнення відповідної помилки. Цю директиву найбільш корисно використовувати в поєднанні з директивами #if, #elsif, #else для перевірки компіляції, якщо деякий умова не вірно.</p>
+				<h3>Директива #pragma</h3>
+				<pre>#pragma compiler specific extension</pre>
+				<p>
+					Директива #pragma використовується для доступу до специфічних розширень компілятора. Спільне використання директиви #pragma c лексемою once просить компілятор включити файл заголовка тільки один раз, незалежно від того, скільки разів він був імпортований:
+				</p>
+				<pre>#pragma once
+// Заголовки
+</pre>
+<p>Директива #pragma також може бути використана для інших цілей, наприклад #pragma зазвичай використовується для відключення попереджень. Наприклад, в MVS:</p>
+<pre>#pragma warning (disable: 4018)</pre>
+				<h3>
+					Типові помилки програмування
+				</h3>
+				<ul class="main-info">
+					<li>Забувають включати аргументи у дужки, в замінюючому тексті макроса.</li>
+					<li>Вставка умовно компілюючих операторів printf для цілей налаштування в місця, де мова С має на увазі тільки один оператор. В цьому випадку умовно компілюючий фрагмент повинен бути включений в складовий оператор. Тоді, якщо програма компілюється з операторами потік управління не змінюється.</li>
+					<li>Завершення директив процесора #define або #include крапкою з комою. Не забувайте, що директиви препроцесора не є операторами мови С.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Далі буде наведена програма використання макросів, вона була написана Петором Гіпсоном. Ця програма надзвичайно доступно пояснює використання макросів, проте, аби показати всю повноту макросів, цей код був дещо доповнений та перероблений.
+				</p>
+				<pre>
+/* Program MACROS, written 23 June 1992 by Peter D. Hipson */
+/* A program that shows macros. */
+#include < stdio.h >
+#include < stdlib.h >
+/*
+* The DONOTHING identifier, although it is defined, is basically
+* a no-operation. An example of its use is shown in the body
+* of the program. Some programmers define DONOTHING as a
+* semicolon; doing so, however, can create problems and is
+* not recommended.
+*/
+#define DONOTHING
+/*
+* Both TRUE and FALSE, below, can be considered to be macros
+* that don't have any operands. When they are included in a
+* source line, they expand to their literal contents.
+*/
+#define TRUE 1
+#define FALSE (!TRUE)
+/*
+* Now define some stock macros. Both MIN() and MAX() may be
+* included (in lowercase) in stdlib.h (with many C compilers);
+* I define them in uppercase, however, to remind me that they
+* are macros, subject to side effects.
+*/
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+/*
+* SWAP() is a neat little variable swapper that swaps the
+* contents of two variables in-place without temporary storage.
+* The only caution is that the variables must be of the same
+* size (but can be of differing types if necessary).
+*
+* Notice SWAP()'s use of braces around the expressions, in
+* case the macro is invoked as a single line after an if()
+* statement that has no braces itself. Failure to include
+* the braces can lead to some strange problems with macros
+* that have more than one statement included in them, such
+* as is the case with SWAP().
+*/
+#define SWAP(a, b) {a ^= b; b ^= a; a ^= b;}
+/*
+* Notice that PRINTAB() uses the stringize operator to form
+* its format string. This usage enables you to have a nice
+* printf() statement without having to do a lot of typing.
+*/
+#define PRINTAB(a, b) printf(#a" = %d "#b" = %d \n", a, b)
+int main()
+{
+	system("color F0");
+	int nOurTime = FALSE;
+	int nSum;
+	int a = 10;
+	int b = 11;
+	/* The DONOTHING identifier tells you that the for()'s statement(s)
+	* have not been omitted:
+	*/
+	for (nSum = 0; nSum == nOurTime; nSum++)
+		DONOTHING;
+    #ifdef DONOTCOMPILE /* Never compile this code */
+	if (nOurTime == TRUE)
+	{/* Process our time... */
+		/* our time code is here. */
+	}
+    #endif
+    #pragma message ("Compiling…")
+    #line 10 "Directives.cpp"
+	printf("This file is '%s' the line is '%d' \n", __FILE__,
+		__LINE__);
+	PRINTAB(a, b);
+	SWAP(a, b);
+	PRINTAB(a, b);
+	system("pause");
+	return(FALSE);
+}
+
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+				<p class="res">Ресурси: http://cppstudio.com/post/5396/<br/>
+http://www.studfiles.ru/preview/415063/page:67/
+</p>
+</div>
 			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/Директиви препроцесора.doc" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>

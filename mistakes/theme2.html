@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student's Helper</title>
+	<title>Student's Helper: Цикл While у мові С</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/articles.css">
@@ -63,18 +63,126 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Цикл While у мові С
 				</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					 Оператор циклу while або цикл while - цикл , що повторює одну і ту саму дію, поки умова продовження циклу while залишається істинною.
+				</p>
+				<pre>
+// Форма запису циклу while
+while ( / * умова продовження циклу while * / )
+	{ 
+		/ * Блок операторів * / ;
+		/ * Управління умовою * /;
+	}
+				</pre>
+				<p>
+					  Умова продовження циклу має бути істинно true, як тільки умова стала хибною, виконується вихід з циклу. Також як і в умовних операторах вибору, фігурні скобочки можуть опускатися в тому випадку, якщо тіло циклу - це один оператор. Але як правило в циклі виконується кілька операторів, так як крім виконання корисної дії необхідно робити умову циклу while хибною, інакше цикл буде нескінченним, а це, в свою чергу, призведе до зависання програми.
+				</p>
+				<p>
+					Розглянемо застосування циклу while на прикладі руху автомобіля. На псевдокоді, то це буде так:<br/><br/>
+					Поки швидкість руху автомобіля менше 60 км/год, продовжувати збільшувати швидкість.<br/><br/>
+					Справжньою умовою циклу, в даному випадку, є швидкість автомобіля менше 60 км / год, а хибністю - швидкість автомобіля більше або дорівнює 60 км / год. Повторення циклу триватиме до тих пір поки швидкість автомобіля не стане більше або дорівнює 60 км / год, після настання цього моменту умова циклу стане хибною, і програма вийде з циклу. Розглянемо фрагмент коду на C з циклом while вирішальним поставлену задачу.
+
+				</p>
+				<pre>
+int speed = 5; // Початкова швидкість автомобіля
+while (speed < 60) // заголовок циклу while
+speed += 10; // Тіло циклу
+				</pre>
+				<h3>
+					Типові помилки
+				</h3>
+				<ul class="main-info">
+					<li>Відсутність у тілі структури while дій, які в кінці кінців призведе до того, що умова у структурі while стане хибною. Звичайно така структура повторення ніколи не буде завершеною – виникне помилка, яка називається «безкінечним циклом».</li>
+					<li>Написання ключового слова while з W у верхньому регістрі у вигляді While. Усы зарезервованы ключові слова мови С, такі як while, if та else, містять тільки символи нижнього регістру.</li>
+					<li>Якщо лічильник або загальна сума не ініціалізовані, результати роботи вашої програми, по усій ймовірності будуть некоректними. Це є приклад логічної помилки.</li>
+					<li>Вибір у якості контрольног такого значення, яке є допустимим значенням даних.</li>
+					<li>Спроба ділення на нуль.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Для закріплення матеріалу по циклу while розробимо всім відому гру «Відгадай число». ЇЇ реалізовувало дуже багато програмістів, тому вона не є новинкою. На псевдокоді це буде так:<br/><br/>
+					// Поки загадане число не вгадано, продовжувати вгадувати його<br/><br/>
+					Загадувати число буде комп'ютер, а ми - відгадувати. Використовуючи генератор випадкових чисел, комп'ютер загадає число від 1 до 10, включно, поки ми не відгадаємо число вихід з циклу не відбудеться.
+
+				</p>
+				<pre>
+#include< iostream >
+#include< ctime >
+
+int main()
+{
+	system("color F0");
+	srand(time(0));
+	int unknown_number = 1 + rand() % 10;              //guessing number
+	int enter_number;                                  //value to store the entered number
+	puts("Enter unknown number from 1 to 10:");        //begin to guess
+	scanf("%d", &enter_number);
+	while (enter_number != unknown_number)
+	{
+		puts("Enter unknown number from 1 to 10:");
+		scanf("%d", &enter_number);                    //continue to guess
+	}
+	puts("You win!!!\n");
+	system("pause");
+}
+				</pre>
+</div>
+				<h2>
+					Цикл do while у мові С
+				</h2>
+				<p>
+					Цикл do while відрізняється від циклу while тим, що в do while спочатку виконується тіло циклу, а потім перевіряється умова продовження циклу. Через таку особливість do while називають циклом з постумовою. Таким чином, якщо умова do while завідомо неправдива, то хоча б один раз блок операторів в тілі циклу do while виконається. В результаті do while відрізняється від циклу while структурою. Якщо в while спочатку виконується перевірка умови продовження циклу, і якщо умова істинна, то тільки тоді виконується тіло циклу. Цикл do while працює з точністю до навпаки, спочатку виконується тіло циклу, а потім перевіряється умова, ось чому тіло циклу do while, хоча б раз, але виконається.
+				</p>
+				<pre>
+// Форма запису оператора циклу do while:
+do // початок циклу do while
+	{
+		/ * Блок операторів * /;
+	} while (/ * умова виконання циклу * /); // Кінець циклу do while
+				</pre>
+				<p>
+					  На початку циклу do while пишеться зарезервоване слово do, після йдуть фігурні скобочки, які можна опускати, в разі використання одного оператора в тілі циклу do while. Після закривання фігурної скобочки, що позначає кінець тіла циклу do while, варто писати умову циклу do while, після якого обов'язково потрібно ставити крапку з комою.
+				</p>
+				<p>
+					Повернемося до програми «Вгадай число», з розділу: Цикл while в C ++. У цьому завданні правильніше було б використовувати цикл do while, адже код зменшиться на два рядки.
+				</p>
+				<pre>
+#include < iostream >
+#include < ctime >
+using namespace std;
+
+int main()
+{
+	system("color F0");
+	srand(time(0));
+	int unknown_number = 1 + rand() % 10;               //guessing number
+	int enter_number;                                   //value to store the entered number
+	do
+	{
+		puts("Enter unknown number from 1 to 10:");
+		scanf("%d", &enter_number);                     //guessing
+	} while (enter_number != unknown_number);
+	puts("You win!!!\n");
+	system("pause");
+}
+
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+				<p class="res">
+					Ресурси: http://cppstudio.com/post/352/
+					<br/>http://cppstudio.com/post/361/
 				</p>
 			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/While and do while.doc" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>

@@ -21,8 +21,8 @@
 }
 
 .buttons {
-	width:350px;
 	margin:30px auto;
+	margin-left:180px;
 }
 
 .button {
@@ -38,13 +38,12 @@
   	transition-duration: 0.4s;
 }
 
-.test-btn, .test-btn:active {
+.test-btn, .test-btn:active, .test-btn:visited {
 	font-family: 'Oswald', sans-serif;
 	opacity:0.5;
 	background: #29aba4;
 	color: #f8f8f8;
 	padding:15px 40px;
-	margin-left:80px;
 	text-decoration: none;
 	-webkit-transition-duration: 0.4s;
   	-moz-transition-duration: 0.4s;
@@ -105,4 +104,8 @@ h3 {
 
 .example h3 {
 	color:#354458 !important;
+}
+
+.res {
+	font-size:80%;
 }

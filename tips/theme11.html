@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student's Helper</title>
+	<title>Student's Helper: Динамічна пам'ять</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/articles.css">
@@ -63,18 +63,173 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Функція malloc() у мові С
 				</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					Прототип функції malloc():
+				</p>
+				<pre>void * malloc( size_t sizemem );</pre>
+				<p>Функція malloc виділяє блок пам'яті, розміром sizemem байт, і повертає покажчик на початок блоку.<br/>
+Зміст виділеного блоку пам'яті не ініціалізується, він залишається з невизначеними значеннями.
+Параметри:<br/>
+sizemem<br/>
+Розмір виділеного блоку пам'яті в байтах.<br/>
+Значення, що повертається<br/>
+Покажчик на виділений блок пам'яті. Тип даних на який посилається покажчик завжди void*, тому це тип даних може бути приведений до бажаного типу даних.<br/>
+Якщо функції не вдалося виділити необхідний блок пам'яті, повертається нульовий покажчик.<br/>
+</p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Використовуйте операцію sizeof для визначення розміру структури.</li>
+					<li>При використовуванні malloc перевіряйте, чи не повернула функція покажчик NULL. Надрукуйте повідомлення про помилку, якщо пам’ять виділена не була.</li>
+					<li>Коли виділена динамічно пам’ять стає непотрібною, викликайте функцію free, щоб негайно повернути пам’ять системі.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Наступна програма створює рядок довжиною вказаною користувачем і заповнює її символами алфавіту. Можлива довжина цього рядка обмежена тільки кількістю вільної пам'яті в системі, яку malloc() може виділити.
+				</p>
+				<pre>
+//Example of using malloc() function
+#include < iostream >
+#include < cstdlib >
+
+int main()
+{
+	system("color F0");
+	int len;
+	
+	puts("Input length of string: ");
+	scanf("%d", &len);
+
+	char * buffer = (char*)malloc(len + 1);              //dynamic allocation of memory for the character string
+	if (buffer == NULL) exit(1);                        //if the memory allocation is not performed then complete the program
+
+	for (int ix = 0; ix < len; ix++)
+		buffer[ix] = rand() % 26 + 'a';
+	buffer[len] = '\0';                                                   //null element
+	puts("Random string:");
+	puts(buffer);
+	free(buffer);                                                         //make memory free
+
+	system("pause");
+}
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
 				</p>
 			</div>
+
+
+				<h2>
+					Функція Calloc у мові С
+				</h2>
+				<p>
+					Виділяє блок пам'яті під numelems елементів і розміром sizelem байтів кожний. Пам'ять обнуляється і повертається покажчик на неї. У разі помилки (наприклад, недостатньо пам'яті) NULL повернеться. якщо numelems або sizelem дорівнює 0, NULL повертається. розмір пам'яті не повинен перевищувати 64 Кбайта.<br/>
+Використання
+
+				</p>
+				<pre>#include < stdlib.h >
+void * calloc (unsigned numelems, size_t sizelem);
+</pre>
+				<p>Pначення, що повертаються<br/>
+При вдалому завершенні повертає покажчик на виділену пам'ять; в іншому випадку - NULL.<br/>
+Які бувають помилки:<br/>
+1. Втрата пам'яті<br/>
+</p>
+<pre>
+int * p = (int *) malloc (100);
+p = (int *) malloc (200); // Втрачений покажчик на перші 100 int’ів, які тепер не можна віддати назад ОС
+</pre>
+<p>
+2.Повторное звільнення виділеної пам'яті
+</p>
+<pre>
+free (p); ... Free (p); // Невизначена поведінка
+правильно:
+free (p);
+p = 0;
+free (p); // Відпрацює без помилок
+</pre>
+<p>
+	Через те, що malloc() не ініціалізує пам’ять, а calloc() це спокійно робить, програмісти надають перевагу calloc(). Calloc() – це бібліотечна функція, яка дуже схожа на функцію malloc(), з двома основними відмінностями. У функції calloc(), необхідно вказати два параметра, а не один: кількість елементів і розмір кожного елемента. За допомогою цих параметрів визначається розмір блоку пам'яті для розміщення, параметри повинні відповідати типу size_t. Друга відмінність полягає в тому, що функція calloc () ініціалізує пам'ять. Значення, яке використовується для ініціалізації пам'яті є абсолютний нуль, який зазвичай, але не завжди обчислюється з плаваючою комою або значенням покажчика NULL. Це нормально, якщо пам'ять буде використовуватися для зберігання рядка або цілого числа. Якщо пам'ять буде використовуватися для значень з плаваючою точкою, ви повинні явно ініціалізувати блок пам'яті після callo (). Я рекомендую вам завжди форматувати пам'ять, виділену з calloc(), якщо ви не знаєте, формат даних, які ви будете зберігати в ньому.
+</p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Використовуйте операцію sizeof для визначення розміру структури.</li>
+					<li>При використовуванні calloc перевіряйте, чи не повернула функція покажчик NULL. Надрукуйте повідомлення про помилку, якщо пам’ять виділена не була.</li>
+					<li>Коли виділена динамічно пам’ять стає непотрібною, викликайте функцію free, щоб негайно повернути пам’ять системі.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Наступна програма виділяє блоки пам'яті. Розмір найбільшого блоку не може бути визначений наперед, тому програма починається з найбільшого розміру (використовуючи розмір int) і намагається виділити масив 32767 членів. Якщо calloc () зазнає невдачі, програма зменшує розмір на 50 відсотків; Це продовжується до тих пір, поки розмір не стане менше, ніж 2 байти. Програма виділяє буфери, кожна з яких містить 32767 2-байтових цілих чисел. Коли запит розподілу зазнає невдачі, програма зменшує розмір, поки більше пам'яті не може бути виділені. Вона не зупиняється, коли немає більше пам'яті. Єдина істотна відмінність між malloc() і calloc() є виклик функції розподілу пам'яті. Код програми:
+				</p>
+				<pre>
+/* CALLOC1, written 1992 by Peter D. Hipson
+* This program allocates arrays of memory.
+*/
+#include < stdio.h >                                                                  //make includes first part of file
+#include < string.h >                                                                 //for string functions
+#include < malloc.h >                                                               //for memory allocation functions
+#include < iostream >
+int main();                                                                              //define main() and establish that this
+//================== program does not use any passed parameters ================
+int main()
+{
+	system("color F0");
+	int i = 0;
+	int j = 0;
+	int *nPointer[100] = { NULL };
+	int nSize = 32767;
+	long lTotalBytes = 0;
+	while (nSize > 0 &&                                                 //make nSize valid
+		nSize <= 32767 &&
+		lTotalBytes < 2000000)                            //mo more than 2M will be allocated
+	{
+		nPointer[i] = (int *)calloc(nSize, sizeof(int));
+		if (nPointer[i] != NULL)
+		{
+			++i;
+			lTotalBytes += (nSize * sizeof(int));
+			printf("Allocated % 5u short int, total % 10ld\n",
+				nSize,
+				lTotalBytes);
+		}
+		else
+		{
+			printf("Couldn’t allocate % 5u short int, total % 10ld\n",
+				nSize,
+				lTotalBytes);
+			nSize /= 2;
+		}
+	}
+	for (j = 0; j < i; j++)
+	{
+			free(nPointer[j]);
+		nPointer[j] = NULL;
+	}
+	system("pause");
+}
+
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+			</div>
+			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/Malloc Calloc.zip" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>

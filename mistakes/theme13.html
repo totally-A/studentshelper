@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student's Helper: Типові помилки програмування</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/articles.css">
+	<link rel="shortcut icon" href="../img/icons/mortarboard.ico">
+
+	<!-- Bootsrap feauters -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="../bootstrap-3.3.6-dist/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="../bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="../bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../font-awesome-4.6.3/css/font-awesome.min.css">
+
+	<!-- Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Jura:600&subset=latin,cyrillic,cyrillic-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<header>
+		<div class="wrapper">
+			<a href="../index.html" class="logo">
+				<div class="emblem">
+					
+				</div>
+				<div class="text">
+					Student's Helper
+				</div>			
+			</a>
+			<div class="top-nav">
+				<nav>
+					<ul>
+						<a href="../index.html">
+							<li class="general">Головна
+								<div class="arrow"></div>
+							</li>
+						</a>
+						<a href="../theory.html">
+							<li class="theory">Теорія
+								<div class="arrow"></div>
+							</li>
+						</a>
+						<a href="../tests.html">
+							<li class="tests">Тести
+								<div class="arrow"></div>
+							</li>
+						</a>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<div class="main">
+		<div class="wrapper">
+			<div class="info">
+				<h2>
+					Типові помилки програмування
+				</h2>
+				<ul class="main-info">
+					<li>Використання ком замість крапки з комою в заголовках структури for.</li>
+					<li>Розміщення крапки з комою відразу після заголовку структури for робить тіло цієї структури пустим оператором. Звичайно це є логічною помилкою.</li>
+				</ul>
+<pre>// форма записи оператора цикла for:
+
+for (/*выражение1*/; /*выражение2*/; /*выражение3*/)
+{
+	/*один оператор или блок операторов*/;
+}
+</pre>
+<p>Якщо в тілі циклу for повинен виконається один оператор, тоді фігурні дужки можна опустити:</p>
+<pre>for (/*выражение1*/; /*выражение2*/; /*выражение3*/)
+/*один оператор*/;
+</pre>
+<p>Розглянемо детально три вирази записані в круглих дужках циклу for.</p>
+<p>Вираз 1 - оголошення (і) або ініціалізація, раніше оголошеної, змінної-лічильника, яка буде відповідати за істинність умови в циклі for. Приклад:</p>
+<pre>int counter = 0; //звідси видно, що була оголошена змінна counter типу int і ініціалізована значенням 0</pre>
+<p>Змінна-лічильник завжди повинна мати цілочисельний тип даних. Якщо змінна була оголошена в циклі (все одно в якому), по завершенні циклу ця змінна буде знищена.<br/>
+Різниця між оголошенням та ініціалізацією змінної:
+</p>
+<pre>counter; //оголошення змінної count
+
+counter = 9; // ініціалізації цілочисельної змінної count значенням 9.
+</pre>
+<p>Вираз 2 - це умова продовження циклу for, воно перевіряється на істинність.</p>
+<pre>counter < 10; // умова істинна поки count строго менше десяти!</pre>
+<p>Вираз 3 змінює значення змінної-лічильника. Без виразу 3 цикл вважається нескінченним, так як зміна вмісту змінної count виконуватися не буде, і якщо спочатку умова була істинним, то цикл буде нескінченним, інакше програма навіть не увійде в цикл. Вирази 1, 2, 3 відокремлюються одна від одної обов'язковими роздільниками, крапкою з комою. Тіло циклу обрамляється фігурними дужками, якщо тіло циклу складається з одного оператора, то фігурні скобочки не потрібні. Під зміною значення змінної мається на увазі зменшення або збільшення значення, наприклад:</p>
+<pre>for (int counter = 0; counter < 15; counter++) //виконується приріст змінної counter с кроком 1 від 0 до 15</pre>
+<p>++ Це операція інкремента, збільшення значення змінної на одиницю;<br/>
+-- Це операція декремента, зменшення значення змінної на одиницю.
+</p>
+<p>Дуже часто неправильно інтерпретується запис меж в циклі for, в нашому випадку приріст змінної counter виконується з кроком 1 від 0 до 15. Зверніть увагу на кінцеву межа. У разі продовження циклу стоїть знак відносини строго менше, а значить, коли значення в змінної counter дорівнюватиме 14, виконається вихід з циклу.</p>
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<pre>
+#include < iostream >
+using namespace std;
+
+int main()
+{
+	system("color F0");
+	for (int counter = 0; counter < 15; counter++)      //start of the cycle
+		cout << " " << counter;                         //body of the cycle
+	cout << endl;
+	system("pause");
+}
+				</pre>
+				<p>
+					Цикл for записаний без фігурних дужок. А раз немає фігурних дужок, значить, тілом циклу є наступний оператор, після заголовка циклу, в нашому випадку - це оператор виведення:
+				</p>
+				<pre>cout << " " << counter;                         //body of the cycle</pre>
+				<p>Фігурні дужки можна не опускати, це кому як зручно. Але в даному випадку без фігурних дужок запис коду більш компактна, ніж з дужками.</p>
+</div>
+			</div>
+			<div class="buttons">
+				<a href="../material/Типові помилки програмування.doc" class="review button" download>
+					Аналіз коду
+				</a>
+			</div>
+
+			<a href="../mistakes.html" class="back-btn"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Назад</a>	
+		</div>
+	</div>
+	<footer>
+		<div class="wrapper">
+			<div class="line-1">
+				<div class="short-info">
+					Student's Helper - це український волонтерський проект, розроблений для того, щоб допомогти студенту у галузі програмування.
+				</div>
+				<div class="bot-nav">
+					<nav>
+						<ul>
+							<a href="../documentation.html">
+								<li>Про проект</li>
+							</a>
+							<a href="../devs.html">
+								<li>Розробники</li>
+							</a>
+						</ul>
+					</nav>
+				</div>
+			</div>		
+			<div class="line-2">
+				© 2016 Найкраща тіма на світі. Усі права захищені.
+			</div>	
+		</div>
+	</footer>
+</body>
+</html>

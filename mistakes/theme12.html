@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student's Helper</title>
+	<title>Student's Helper: Дерева</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/articles.css">
@@ -63,18 +63,138 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Дерева
 				</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					 Дерево є нелінійної структурою, двовимірної структурою даних з особливими властивостями. Вузли дерева містять дві або більше зв'язків. Двійкові дерева - дерева, вузли яких містять тільки дві зв'язки. Перший вузол дерева називається кореневим. Кожна зв'язок кореневого вузла посилається на нащадка. Лівий нащадок - перший вузол лівого піддерева, а правий нащадок - перший вузол правого піддерева. Нащадки одного вузла називаються вузлами-сиблингами. Двійкове дерево пошуку (з неповторними значеннями у вузлах) влаштовано так, що значення в будь-якому лівому піддереві менше, ніж значення в батьківському вузлі, а значення в будь-якому правому піддереві більше, ніж значення в батьківському вузлі.
 				</p>
+				<h3>
+					Типові помилки програмування
+				</h3>
+				<ul class="main-info">
+					<li>Зв’язці останнього вузла не привласнюється NULL.</li>
+					<li>Зв’язкам листових вузлів не привласнюється NULL.</li>
+					<li>Спроба вставити у дерево значення, яке повторюється.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<pre>
+/*Сreating a binary tree and crawl with the order, preliminary and pending sample*/
+#include < stdio.h >
+#include < stdlib.h >
+#include < time.h >
+
+struct treeNode {
+	struct treeNode *leftPtr;
+	int data;
+	struct treeNode *rightPtr;
+};
+typedef struct treeNode TREENODE;
+typedef TREENODE *TREENODEPTR;
+
+void insertNode(TREENODEPTR *, int);
+void inOrder(TREENODEPTR);
+void preOrder(TREENODEPTR);
+void postOrder(TREENODEPTR);
+
+int main()
+{
+	system("color F0");
+	int i, item;
+	TREENODEPTR rootPtr = NULL;
+	srand(time(NULL));
+
+	/*try to place a tree of 10 random numbers in the range from 0 to 14*/
+	printf("The numbers being placed in the tree are:\n");
+	for (i = 1; i <= 10; i++) {
+		item = rand() % 15;
+		printf("%3d", item);
+		insertNode(&rootPtr, item);
+	}
+
+	/*bypass tree with prefetch*/
+	printf("\n\n The preOrder traversal is:\n");
+	preOrder(rootPtr);
+
+	/*get around the tree with the order sample*/
+	printf("\n\n The inOrder traversal is:\n");
+	inOrder(rootPtr);
+
+	/*get around the tree with a delayed sample*/
+	printf("\n\n The postOrder traversal is:\n");
+	postOrder(rootPtr);
+
+	puts("\n");
+	system("pause");
+}
+//================= inserting node ======================
+void insertNode(TREENODEPTR *treePtr, int value)
+{
+	if (*treePtr == NULL)
+	{/* *treePtr equal NULL*/
+		*treePtr = (TREENODEPTR)malloc(sizeof(TREENODE));
+		if (*treePtr != NULL)
+		{
+			(*treePtr)->data = value;
+			(*treePtr)->leftPtr = NULL;
+			(*treePtr)->rightPtr = NULL;
+		}
+
+		else
+			printf("%d not inserted. No memory available. \n", value);
+	}
+	else
+		if (value < (*treePtr)->data)
+			insertNode(&((*treePtr)->leftPtr), value);
+		else
+			if (value >(*treePtr)->data)
+				insertNode(&((*treePtr)->rightPtr), value);
+			else
+				printf("dup");
+}
+//================= bypass tree with prefetch ======================
+void preOrder(TREENODEPTR treePtr)
+{
+	if (treePtr != NULL)
+	{
+		printf("%3d", treePtr->data);
+		preOrder(treePtr->leftPtr);
+		preOrder(treePtr->rightPtr);
+	}
+}
+//================= get around the tree with the order sample ======================
+void inOrder(TREENODEPTR treePtr)
+{
+	if (treePtr != NULL)
+	{
+		inOrder(treePtr->leftPtr);
+		printf("%3d", treePtr->data);
+		inOrder(treePtr->rightPtr);
+	}
+}
+
+//================= get around the tree with a delayed sample ======================
+void  postOrder(TREENODEPTR treePtr)
+{
+	if (treePtr != NULL)
+	{
+		postOrder(treePtr->leftPtr);
+		postOrder(treePtr->rightPtr);
+		printf("%3d", treePtr->data);
+	}
+}
+
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+</div>
 			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/Дерева.doc" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>

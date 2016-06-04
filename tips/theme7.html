@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student's Helper</title>
+	<title>Student's Helper: Функції</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/articles.css">
@@ -63,18 +63,207 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Функції
 				</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					 Крім виконання функцій зі стандартних заголовків файлів, в мові програмування С ++ передбачена можливість створення власних функцій. У мові програмування С ++ є два типи функцій:
+				</p>
+				<ol>
+					<li>Функції, які не повертають значень</li>
+					<li>Функції, які повертають значення</li>
+				</ol>
+				<p>Функції, що не повертають значення, завершивши свою роботу, жодної відповіді програмі не дають. Розглянемо структуру оголошення таких функцій.</p>
+				<pre>
+//структура оголошення функцій, які не повертають значення
+void /*ім'я функції*/(/*параметри функції*/) //заголовок функції
+{
+	//тіло функції
+}
+				</pre>
+				<p>
+					Рядок 2 починається з зарезервованого слова void - це тип даних, який не може зберігати будь-які дані. Тип даних void говорить про те, що ця функція не повертає ніяких значень. void ніяк по-іншому не використовується і потрібен тільки для того, щоб компілятор міг визначити тип функції. Після зарезервованого слова void пишеться ім'я функції. Відразу за ім'ям функції ставляться дві круглі скобочки, відкривається і закривається. Якщо потрібно функції передавати якісь дані, то всередині круглих дужок оголошуються параметри функції, вони відокремлюються один від одного комами. Рядок 2 називається заголовком функції. Після заголовка функції пишуться дві фігурні скобочки, всередині яких знаходиться алгоритм, званий тілом функції.<br/>
+Функції, які повертають значення, по завершенню своєї роботи повертають певний результат. Такі функції можуть повертати значення будь-якого типу даних. Структура функцій, які повертають значення буде трохи відрізняться від структури функцій розглянутих раніше.
+				</p>
+				<pre>
+// структура оголошення функцій, які повертають значення
+/*тип данних, який повертається*/ /*ім'я функції*/(/*параметри функції*/) // заголовок функції
+{
+	// тіло функції
+	return /*значення, яке повертається*/;
+}
+
+				</pre>
+				<p>
+					Хорошому стилю програмування відповідає спосіб оголошення функцій після main(). Але у цьому випадку потрібно оголошувати прототипи функцій. Структура оголошення прототипу дуже схожа зі структурою оголошення функції. </p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Вставляйте пустий рядок між визначеннями функцій, щоб відділити функції один від одної та покращити тим самим читабельність програми.</li>
+					<li>Хоча упущений тип, що повертається за замовчуванням розцінюється як int, завжди задавайте тип, що повертається явним способом. Але для функції main() тип, що повертається зазвичай опускається.</li>
+					<li>Включайте тип кожного параметра в список параметрів функції навіть у тому випадку, якщо даний параметр відноситься до типу int, який прийнято за замовчуванням.</li>
+					<li>Вибір обдуманих імен функцій та параметрів робить програми більш зручними та допомагає запобігти надмірному використанню коментарів.</li>
+					<li>Імена параметрів іноді включаються до прототипу функції з ціллю документування. Компілятор ігнорує ці імена.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Розробимо програму, яка визначає, чи є введене п'ятизначне число паліндромом. Паліндром - це число або текст, який читається однаково як зліва, так і справа: 93939; 49094; 11311.
+				</p>
+				</p>
+				<pre>
+#include < iostream >
+using namespace std;
+
+bool palindrom5(int);                         //function prototype finding palindrome five-digit numbers
+//================= main function ========================
+int main()
+{
+	system("color F0");
+	cout << "Enter five-digit number: ";      //enter the five-digit number
+	int in_number, out_number;                //variables to store the entered five digits
+	cin >> in_number;
+	out_number = in_number;                   //variable out_number save the entered number
+
+	if (palindrom5(in_number))                //if the function returns true, the condition is true, otherwise the function returns false - false
+		cout << "Number " << out_number << " - palendrom" << endl;
+	else
+		cout << "This is not palendrom" << endl;
+	system("pause");
+}
+//=============== function to find palindrome five-digit numbers ================
+bool palindrom5(int number)                   
+{
+	int balance1, balance2, balance4, balance5;//variables storing intermediate results
+	balance1 = number % 10;                   //variable balance1 awarded the first category five digits
+	number = number / 10;                     //reduce the entered number by one digit
+
+	balance2 = number % 10;                   //variable balance2 awarded second rank
+	number = number / 100;                    //reduce the entered number by two digits
+
+	balance4 = number % 10;                   //variable balance4 awarded the fourth digit
+	number = number / 10;                     //reduce the entered number by one digit
+
+	balance5 = number % 10;                   //variable balance5 awarded the fifth digit
+	if ((balance1 == balance5) && (balance2 == balance4))
+		return true;                          //function returns true
+	else
+		return false;                         //function returns false
+}
+
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
 				</p>
 			</div>
+
+
+			<h2>
+					Шаблони функцій
+				</h2>
+				<p>
+					Шаблони функцій, своїми словами, - це інструкції, згідно з якими створюються локальні версії шаблонованої функції для певного набору параметрів і типів даних.<br/>
+
+Насправді, шаблони функцій це потужний інструмент в С ++, який набагато спрощує працю програміста. Наприклад, нам потрібно запрограмувати функцію, яка виводила б на екран елементи масиву. Завдання не складна! Але, щоб написати таку функцію, ми повинні знати тип даних масиву, який будемо виводити на екран. І тут нам кажуть - тип даних не один, ми хочемо, щоб функція виводила масиви типу int, float і char.
+				</p>
+				<pre>
+//Function template printArray definition
+template< typename T > // T can be anything, type template parameter
+
+void printArray(T* array, const int count)
+{
+	for (int i = 0; i < count; i++) //prints array
+		cout << array[i] << " ";
+
+	cout << endl;
+}
+				</pre>
+				<p>
+					Цей шаблон функції оголошує єдиний параметр Т у якості типу масиву, який виводиться функцією printArray. Коли компалітор знаходить у коді прогарми виклик функції printArray замість Т по усьому визначенню шаблона та створює кінцевий екземпляр функції для виведення масиву даних з елементами вказано типу. Потім знову створена функція компілюється. Реалізація для типу int виглядає так:
+				</p>
+				<pre>
+void printArray(int *array, const int count)
+{
+	for (int i = 0; i < count; i++) //prints array
+		cout << array[i] << " ";
+
+	cout << endl;
+}
+				</pre>
+				<p>
+					Кожен формальний параметр із заголовка шаблона повинен з’явитись у списку параметрів функції хоча б один раз. Ім’я параметра у списку параметрів шаблона може використовуватися тільки один раз. Імена формальних параметрів у різних шаблонах функцій не обов’язково мають бути унікальними. </p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Кожен формальний параметр із заголовка шаблона повинен з’явитись у списку параметрів функції хоча б один раз.</li>
+					<li>Ім’я параметра у списку параметрів шаблона може використовуватися тільки один раз.</li>
+					<li>Імена формальних параметрів у різних шаблонах функцій не обов’язково мають бути унікальними.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Далі наведена програма, яка ілюструє застосування шаблонів.
+				</p>
+				</p>
+				<pre>
+#include < iostream >
+using namespace std;
+
+
+
+//Function template printArray definition
+template< typename T > // T can be anything, type template parameter
+
+void printArray(const T *const array, int count)
+{
+	for (int i = 0; i < count; i++) //prints array
+		cout << array[i] << " ";
+
+	cout << endl;
+}
+
+int main()
+{
+	system("color F0");
+	const int aCount = 5; //size of array a
+	const int bCount = 7; //size of array b
+	const int cCount = 6; //size of array c
+
+	int a[aCount] = { 1, 2, 3, 4, 5 }; //int a  is 1,2,3,4,5 and [holds] aCount which is a size of 5
+	double b[bCount] = { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7 };
+	char c[cCount] = "HELLO"; //6th position for null
+
+	cout << "Array a contains: " << endl;
+
+	//Call integer function-template specialization
+	printArray(a, aCount);
+
+	cout << "Array b contains: " << endl;
+
+	//Call integer function-template specialization
+	printArray(b, bCount);
+
+	cout << "Array c contains: " << endl;
+
+	//Call integer function-template specialization
+	printArray(c, cCount);
+	system("pause");
+}
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+			</div>
+			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/Functions and Templates.zip" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>

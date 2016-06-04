@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student's Helper</title>
+	<title>Student's Helper: Спискові структури даних</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/articles.css">
@@ -63,18 +63,530 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Стеки
 				</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					 Стек - це спрощений варіант пов'язаного списку. Нові вузли можуть додаватися в стек і віддалятися з стека тільки зверху. З цієї причини, стек часто називають структурою від «останнім прийшов - перший вийшов» (LIFO). На стек посилаються через покажчик на верхній елемент стека. Елемент в останньому вузлі стека встановлений рівним NULL, щоб позначити кордон стека.<br/>
+Різниця між стеком і зв'язаними списками в тому, що вставку і видалення в пов'язаних списках можна виконувати в будь-якому місці, а в стеку тільки зверху.<br/>
+Основні функції, які використовуються при роботі з стеками - push і pop. Функція push створює новий вузол і поміщає його на вершину стека. Функція pop видаляє верхній вузол стека, звільняє пам'ять, яка була виділена вилученому вузлу, і повертає вилучене значення.<br/>
+Стеки мають безліч різноманітних застосувань. Наприклад, щоразу, коли відбувається виклик функції, викликана функція повинна знати, як повернутися до викликає, тому адреса повернення поміщається в стек. У разі, коли відбувається цілий ряд послідовних викликів, адреси повернення розміщуються в стеці в порядку останнім прийшов - першим вийшов, так що після завершення виконання кожної функції відбувається перехід до функції, що її викликала.
 				</p>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Розглянемо приклад застосування стеків на програмі. Програма (результат її виконання представлений на рис.1) працює з простим стеком цілих чисел. Програма виконує три дії на вибір: 1)поміщає значення в стек (функція push). 2)Вилучає значення зі стека (функція pop), і 3) завершує роботу.
+				</p>
+				<pre>
+#include < stdio.h >
+#include < stdlib.h >
+struct stackNode                     //structure, which refers to itself
+{
+	int data;
+	struct stackNode *nextPtr;
+};
+
+typedef struct stackNode STACKNODE;
+typedef STACKNODE *STACKNODEPTR;
+
+
+void push(STACKNODEPTR *, int); 
+int pop(STACKNODEPTR *);
+int isEmpty(STACKNODEPTR);
+void printStack(STACKNODEPTR);
+void instructions();
+
+//================ main function ====================
+int main()
+{
+	system("color F0");
+	STACKNODEPTR stackPtr = NULL;    //point to a header
+	int choice, value;
+
+	instructions();
+	printf("? ");
+	scanf("%d", &choice);
+	while (choice != 3)
+	{
+		switch (choice) {
+		case 1:                  //pushing a value on the stack
+			printf("Enter an integer: ");
+			scanf("%d", &value);
+			push(&stackPtr, value);
+			printStack(stackPtr);
+			break;
+		case 2:                  //popping a value off the stack
+			if (!isEmpty(stackPtr))
+				printf("The popped value is %d.\n",
+				pop(&stackPtr));
+			printStack(stackPtr);
+			break;
+		default:
+			printf("Invalid choice\n\n");
+			instructions();
+			break;
+		}
+		printf("? ");
+		scanf("%d", &choice);
+	}
+	system("pause");
+}
+//================ instruction to program ====================
+void instructions()
+{
+	printf("Enter choice:\n"
+		"1. To push a value on the stack\n"
+		"2. To pop a value off the stack\n"
+		"3. To end program\n");
+}
+//================ putting new element to the head of the stack ====================
+void push(STACKNODEPTR *topPtr, int info)//, char Fam, char mar )
+{
+	STACKNODEPTR newPtr;
+
+	newPtr = new STACKNODE;
+	if (newPtr != NULL)
+	{
+		newPtr->data = info;
+		newPtr->nextPtr = *topPtr;
+		*topPtr = newPtr;
+	}
+	else
+		printf("%d not inserted. no memory available. \n", info);
+}
+//================ deleting node on from the head of the stack ====================
+int pop(STACKNODEPTR *topPtr)
+{
+	STACKNODEPTR tempPtr;
+	int popValue;
+
+	tempPtr = *topPtr;
+	popValue = (*topPtr)->data;
+	*topPtr = (*topPtr)->nextPtr;
+	free(tempPtr);
+	return popValue;
+}
+//================ printing stack ====================
+void printStack(STACKNODEPTR currentPtr)
+{
+	if (currentPtr == NULL)
+		printf("The stack is empty.\n\n");
+	else
+	{
+		printf("The stack is:\n");
+
+		while (currentPtr != NULL)
+		{
+			printf("%d ->", currentPtr->data);
+			currentPtr = currentPtr->nextPtr;
+		}
+		printf("NULL\n\n");
+	}
+}
+//================ if stack is empty ====================
+int isEmpty(STACKNODEPTR topPtr)
+{
+	return topPtr == NULL;
+}
+
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+</div>
+
+
+				<h2>
+					Черги
+				</h2>
+				<p>
+					Іншою поширеною структурою даних є чергу У черзі вузли видаляються тільки з голови, а додаються тільки у хвіст черги. З цієї причини черги часто називають структурами даних типу «першим прийшов - першим пішов» (FIFO). Операції постановки в чергу і видалення з черги носять назви enqueue (поставити в чергу) і dequeue (виключити з черги).<br/>
+Більшість комп'ютерів обладнано тільки одним процесором, тому в кожен конкретний момент часу може обслуговуватися тільки один користувач (завдання). Решта ж користувачів ставляться в чергу. Кожен стоїть в черзі, далі поступово переміщається до її початку у міру обслуговування.
+Черги також використовуються при організації буфера друку.
+
+				</p>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Наступна програма – приклад роботи з чергою. Програма пропонує виконати наступні дії на вибір: поставити вузол до черги(функція enqueue), видалити вузол з черги(функція dequeue), а також вийти із програми.
+				</p>
+				<pre>
+/*Queue support*/
+#include< stdio.h >
+#include< stdlib.h >
+
+struct queueNode {
+	int data;
+	struct queueNode *nextPtr;
+};
+
+typedef struct queueNode QUEUENODE;
+typedef struct queueNode *QUEUENODEPTR;
+
+/*function prototypes*/
+void printQueue(QUEUENODEPTR);
+int isEmpty(QUEUENODEPTR);
+char dequeue(QUEUENODEPTR *, QUEUENODEPTR *);
+void enqueue(QUEUENODEPTR *, QUEUENODEPTR *, char);
+void instructions(void);
+//====================== main function =========================
+int main()
+{
+	system("color F0");
+	QUEUENODEPTR headPtr = NULL, tailPtr = NULL;
+	int choice;
+	char item;
+
+	instructions();
+	printf("?");
+	scanf("%d", &choice);
+	while (choice != 3){
+		switch (choice){
+		case 1:
+			printf("Enter a character: ");
+			scanf("\n%c", &item);
+			enqueue(&headPtr, &tailPtr, item);
+			printQueue(headPtr);
+			break;
+
+		case 2:
+			if (!isEmpty(headPtr)){
+				item = dequeue(&headPtr, &tailPtr);
+				printf("%c has been dequeued.\n", item);
+			}
+			printQueue(headPtr);
+			break;
+
+		default:
+			printf("Invalid Choice.\n\n");
+			instructions();
+			break;
+			
+		}
+
+         printf("?");
+		scanf("%d", &choice);
+	
+	}
+	system("pause");
+}
+//================ instruction to program ====================
+void instructions(void)
+{
+	printf("Enter your choice:\n"
+		"1 to add an item to the queue\n"
+		"2 to remove an item from the queue\n"
+		"3 to end\n");
+}
+//================ putting new element to the queue ====================
+void enqueue(QUEUENODEPTR *headPtr, QUEUENODEPTR *tailPtr, char value)
+{
+
+	QUEUENODEPTR newPtr;
+
+	newPtr = new QUEUENODE;
+
+	if (newPtr != NULL){
+		newPtr->data = value;
+		newPtr->nextPtr = NULL;
+
+		if (isEmpty(*headPtr))
+			*headPtr = newPtr;
+		else
+			(*tailPtr)->nextPtr = newPtr;
+
+		*tailPtr = newPtr;
+	}
+	else
+		printf("%c was not inserted. No memory available.\n", value);
+}
+//================ deleting node on from the queue ====================
+char dequeue(QUEUENODEPTR *headPtr, QUEUENODEPTR *tailPtr){
+	char value;
+	QUEUENODEPTR tempPtr;
+
+	value = (*headPtr)->data;
+	tempPtr = *headPtr;
+	*headPtr = (*headPtr)->nextPtr;
+	if (*headPtr == NULL)
+		*tailPtr = NULL;
+	free(tempPtr);
+	return value;
+}
+//================ if queue is empty ====================
+int isEmpty(QUEUENODEPTR headPtr)
+{
+	return headPtr == NULL;
+}
+//================ printing queue ====================
+void printQueue(QUEUENODEPTR currentPtr)
+{
+	if (currentPtr == NULL)
+		printf("Queue is empty.\n\n");
+	else
+	{
+		printf("The queue is ;\n");
+		while (currentPtr != NULL)
+		{
+			printf("%c --> ", currentPtr->data);
+			currentPtr = currentPtr->nextPtr;
+		}
+		printf("NULL\n\n");
+	}
+}
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+</div>
+
+
+				<h2>
+					Пов'язані списки
+				</h2>
+				<p>
+					Пов'язаний список - це лінійний набір посилаються на себе структур, званих вузлами, і об'єднаних покажчиком-зв'язкою, звідси і назва - «пов'язаний» список. Доступ до пов'язаного списку забезпечується покажчиком на перший вузол списку. Доступ до наступних вузлів проводиться через зв'язує покажчик, що зберігається в кожному вузлі. За спільною згодою зв'язує покажчик в останньому вузлі списку встановлюється вNULL, відзначаючи кінець списку. Дані зберігаються у зв'язаному списку динамічно - кожен вузол створюється в міру необхідності. Вузол може містити дані будь-якого типу, включаючи інші структури. Стеки і черги також належать до лінійним структурам даних, і, як ми побачимо, є спеціальними варіантами пов'язаних списків. Дерева ж є нелінійними структурами даних.<br/>
+Списки даних можуть зберігатися в масивах, проте пов'язані списки дають певні переваги. Пов'язаний список зручний, коли заздалегідь не відомо, скільки елементів даних буде містити структура. Пов'язані списки є динамічними, тому довжина списку при необхідності може збільшуватися або зменшуватися. 
+				</p>
+				<h3>
+					Типові помилки програмування
+				</h3>
+				<ul class="main-info">
+					<li>Зв’язні списки не дають можливість Негайного доступу до своїх елементів. Тому не слід плутати зв’язні списки з масивами, елементи яких зберігаються в послідовних комірках пам’яті.</li>
+					<li>Покажчики займають місце у пам’яті.</li>
+					<li>Динамічне виділення пам’яті тягне за собою додаткові витати часу на виклик функцій.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Умова задачі: Побудувати двонаправлений список. Елемент списку містить дані про ім'я, розмір, дату створення файлу і права доступу до нього (читати, писати, доступ заборонений). Переписати в однонаправлений список дані про файли, права доступу до яких заборонені. Визначити кількість таких файлів. Надрукувати вхідний та вихідний списки.
+				</p>
+				<pre>
+#include< iostream >
+#include< string.h >
+#include< conio.h >
+#include < iomanip >
+using namespace std;
+struct File{                                   //оголошення структури
+	char name[10];                             //ім'я файлу
+	int size;                                  //розмір файлу
+	char date[10];                             //дата створення файлу
+	char access[20];                           //доступ до файлу
+};
+struct File2{                                  //оголошення структури
+	char name2[10];                            //ім'я файлу
+	int size2;                                 //розмір файлу
+	char date2[10];                            //дата створення файлу
+	char access2[20];                          //доступ до файлу
+};
+struct Item{                                   //тип елемента списку
+	File data;                                 //інформаційне поле
+	Item * next;                               //покажчик на наступний елемент
+	Item * back;                               //покажчик на попередній елемент
+};
+Item *head,                                    //покажчик на початок списку
+*newptr = NULL,                                //покажчик на елемент, що вводиться
+*current,                                      //покажчик на поточний елемент
+*previous,                                     //покажчик на попередній елемент
+*last;                                         //покажчик на останній елемент
+struct Item2{                                  //тип елемента списку
+	File data2;                                //інформаційне поле
+	Item2 * next2;                             //покажчик на наступний елемент
+};
+Item2 *head2,                                  //покажчик на початок списку
+*newptr2 = NULL,                               //покажчик на елемент, що вводиться
+*current2,                                     //покажчик на поточний елемент
+*previous2,                                    //покажчик на попередній елемент
+*last2;                                        //покажчик на останній елемент
+char key, answer, ans;
+int i, n, j, k;
+//================== меню вибору ======================
+void menu()
+{
+	cout << "           MENU         " << endl;
+	cout << "1. List of files" << endl;
+	cout << "2. Make one - way linear list of files with no access" << endl;
+	cout << "3. Define number of files with no access" << endl;
+	cout << "4. Exit" << endl;
+}
+//================== додавання поточного елемент до двунаправленого списку ======================
+void input()
+{
+	if (head == NULL)                          //якщо список порожній
+	{
+		head = newptr;                         //покажчик на вершину списку перемістити на перший елемент
+		newptr->back = NULL;                   //покажчик на попередній елемент має значення NULL 
+		newptr->next = NULL;                   //покажчик на наступний елемент має значення NULL
+	}
+	else
+	{
+		newptr->next = head;                   //зв'язати новий елемент з вершиною списку
+		newptr->back = NULL;                   //покажчик на попередній елемент має значення NULL
+		head->back = newptr;                   //зв'язати вершину з новим елементом
+		head = newptr;                         //перемістити вершину списку на елемент, що додається 
+	}
+}
+//================== введення елементів списку ======================
+void InputData()
+{
+	do
+	{   
+		newptr = new Item;                     //виділити пам'ять для елемента                                      
+		cout << "Input name of file" << endl;
+		cin >>newptr->data.name;                       
+		cout << "Input size of file" << endl;
+		cin >> newptr->data.size;
+		cout << "Input the date of creation" << endl;
+		cin >> newptr->data.date;
+		cout << "Input file permission (read/write/unavailable)" << endl;
+		cin >> newptr->data.access;
+		cout << "continue input y/n" << endl;
+		cin >> ans;
+		input();                               //додавання поточного елемент до двунаправленого списку
+	} while (ans != 'n');
+	getch();
+}
+//================== відображення двунаправленого лінійного списку на екран ======================
+void show()
+{
+	current = head;                            //початок списку
+	cout << "=============================================================" << endl;
+	cout << setw(10) << "Name" << setw(10) << "Size" << setw(20) << "Date of creation" << setw(20) << "Access to file" << endl;
+	cout << "=============================================================" << endl;
+	do
+	{                                          //вивести значення елементів
+		cout << setw(10) << current->data.name << setw(10) << current->data.size << setw(20) << current->data.date << setw(20) << current->data.access << endl;
+		current = current->next;               //перемістити покажчик на наступний елемент
+	} while (current);                         //доки не закінчиться список
+	cout << endl;
+}
+//================== додавання поточного елемент до однонаправленого списку ======================
+void input2()
+{
+	if (head2 == NULL)                         //якщо список порожній
+	{
+		head2 = newptr2;                       //покажчик на вершину списку перемістити на перший елемент
+		newptr2->next2 = NULL;                 //покажчик на наступний елемент має значення NULL
+	}
+	else
+	{
+		newptr2->next2 = head2;                //зв'язати новий елемент з вершиною списку
+		head2 = newptr2;                       //перемістити вершину списку на елемент, що додається
+	}
+}
+//================== відображення однонаправленого лінійного списку на екран ======================
+void outlist()
+{
+	j = 0;
+	current2 = head2;                          //початок списку
+	if (current2 == NULL)                      //якщо список порожній
+	{
+		cout << "List i empty" << endl;        //вивести повідомлення
+	}
+	else
+	{
+		cout << "Output list:" << endl;
+		cout << "=============================================================" << endl;
+		cout << setw(10) << "Name" << setw(10) << "Size" << setw(20) << "Date of creation" << setw(20) << "Access to file" << endl;
+		cout << "=============================================================" << endl;
+		do
+		{                                      //вивести значення елементів
+			cout << setw(10) << current2->data2.name << setw(10) << current2->data2.size << setw(20) << current2->data2.date << setw(20) << current2->data2.access << endl;
+			current2 = current2->next2;        //перемістити покажчик на наступний елемент
+			j++;
+		} while (current2);                    //доки не закінчиться список
+		cout << endl;
+		k = j;
+	}
+}
+//================== знаходження елементів для додавання в однонаправлений список ======================
+void ChooseFiles()
+{
+	current = head;                            //початок списку
+	do{
+		if (strcmp(current->data.access, "unavailable") == 0)//якщо доступу до файла немає
+		{
+			newptr2 = new Item2;               //виділити пам'ять для елемента 
+			newptr2->data2=current->data;      //занести значення пам'ять
+			current = current->next;           //перемістити покажчик на наступний елемент
+			input2();                          //додавання поточного елемент до однонаправленого списку
+		}
+		else{
+			if (strcmp(current->data.access, "read") == 0)//якщо файл відкритий для читання
+			{
+				current = current->next;       //перемістити покажчик на наступний елемент
+			}
+			else
+			{
+				if (strcmp(current->data.access, "write") == 0)//якщо файл відкритий для запису
+				{
+					current = current->next;   //перемістити покажчик на наступний елемент
+				}
+			}
+		}
+	} while (current);                         //доки не закінчиться список
+	outlist();
+}
+//================== головна функція ======================
+int main()
+{
+	system("color F0");
+	do
+	{
+		cout << "Lab 6 Executor: Dvornyk Victoria IS-53" << endl;
+		cout << "Bidirectional lists" << endl;
+		head = NULL;
+		last = NULL;
+		char sym;
+		do{
+			cout << endl << endl;
+			menu();
+			cout << "Press key 1..4:" << endl;
+			cin >> key;                           //вибрати пункт меню
+			switch (key)
+			{
+			case '1':{
+				system("cls");
+				InputData();                      //доки не закінчиться список
+				show();                           //відображення двунаправленого лінійного списку на екран
+				break;
+			}
+			case '2':{
+				system("cls");
+				ChooseFiles();                    //знаходження елементів для додавання в однонаправлений список
+				break;
+			}
+			case '3':{
+				system("cls");
+				cout << "Number of files with no access:" << endl;
+				cout << k << endl;                //кількість елементів однонаправленого списку
+				break;
+			}
+			default:{cout << "Try another time..." << endl; break; }
+			}
+		} while (key != '4');                     //умова продовження програми
+		cout << "repeat? y/n" << endl;
+		cin >> answer;
+	} while (answer != 'n');
+	system("pause");
+}
+
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+</div>
 			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/Data Structures.zip" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>

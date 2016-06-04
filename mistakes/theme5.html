@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student's Helper</title>
+	<title>Student's Helper: Рекурсія у мові С</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/articles.css">
@@ -63,18 +63,84 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Рекурсія у мові С
 				</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					 Рекурсія досить поширене явище, яке зустрічається не тільки в областях науки, а й у повсякденному житті. Наприклад, ефект Дросте, трикутник Серпінського і т. д. Найпростіший варіант побачити рекурсію - це навести веб-камеру на екран монітора комп'ютера, природно, попередньо її включивши. Таким чином, камера буде записувати зображення екрану комп'ютера, і виводити його ж на цей екран, вийде щось на зразок замкнутого циклу. У підсумку ми будемо спостерігати щось схоже на тунель.<br/>
+У програмуванні рекурсія тісно пов'язана з функціями, точніше саме завдяки функціям в програмуванні існує таке поняття як рекурсія або рекурсивна функція. Простими словами, рекурсія - визначення частини функції (методу) через саму себе, тобто це функція, яка викликає саму себе, безпосередньо (в своєму тілі) або побічно (через іншу функцію). Типовими рекурсивними завданнями є завдання: знаходження факторіалу числа, знаходження чискл Фібоначчі. Такі завдання ми вже вирішували, але з використанням циклів, тобто ітераційно. Взагалі кажучи, все те, що вирішується ітераційно можна вирішити рекурсивно, тобто з використанням рекурсивної функції. Все рішення зводиться до вирішення основного або, як ще його називають, базового випадку. Існує таке поняття як крок рекурсії або рекурсивний виклик. У разі, коли рекурсивна функція викликається для виконання складного завдання (НЕ базового випадку) виконується деяка кількість рекурсивних викликів або кроків, з метою зведення задачі до більш простої. І так до тих пір поки не отримаємо базове рішення. Приклад використання рекурсії наведемо далі.
 				</p>
+				<h3>
+					Типові помилки
+				</h3>
+				<ul class="main-info">
+					<li>Відсутність  повернення значення із рекурсивної функції, коли воно необхідне.</li>
+					<li>Пропуск основного випадку або некоректний запис кроку рекурсії призводить до того, що рекурсія не збігається до основного випадку. Це викликає безкінечну рекурсію і призводить в кінці до переповнення пам’яті. Аналогією цього є проблема безкінечного циклу в ітераційному (нерекурсивному) рішенні. Безкінечна рекурсія може буди також викликана неправильним введенням значень.</li>
+					<li>Випадковий виклик не рекурсивної функції самої себе або безпосередньо, або опосередковано через іншу функцію.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Умова задачі: Написати програму, яка обчислює опір електричного кола, схема якої приведена на рис. Величини опорів і порядок ланцюга (кількість опорів R2) повинні вводитися під час роботи програми.
+				</p>
+				<img src="../img/deadlydoe.jpg" alt="">
+				<pre>
+//Calculates resistance of n-tier electric circuit
+#include < stdio.h >
+#include < conio.h >
+#include < iostream >
+
+float r1, r2, r3; //the resistances of which chain comprises
+//calculates the resistance of the chain n-th order
+float rcep(int n)
+{
+	float r; //resistance of the chain of order n-1 
+		if (n == 1)
+			return(r1 + r2 + r3);
+		else
+		{
+			r = rcep(n-1);
+			return (r1 + r2*r / (r2 + r) + r3);
+		}
+}
+void main()
+{
+	system ("color F0");
+	int n; //number of units (the order) of the chain
+	float rc; //resistance of the chain
+	puts("Calculation the resistance of the circuit ");
+	puts("Enter the value of the resistance (Ohms):");
+	printf("r1 ->");
+	scanf("%f", &r1);
+	printf("г2 ->");
+	scanf("%f", &r2);
+	printf("r3 ->");
+	scanf("%f", &r3);
+	printf("The order of the chain ->");
+	scanf("%i", &n);
+	rc = rcep(n); //the resistances are transmitted
+	// to the function rcep through global variables
+	printf("The resistance of the circuit:");
+	if (rc > 100)
+	{
+		rc /= 1000;
+		printf("%5.2f kOhms\n", rc);
+	}
+	else
+		printf("%5.2f Ohms\n", rc);
+	puts("\nClick < Enter > to complete");
+	getch();
+}
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+</div>
 			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/Рекурсія у мові С.doc" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student's Helper</title>
+	<title>Student's Helper: Структури у мові С</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/articles.css">
@@ -63,18 +63,247 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Структури у мові С
 				</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					 Структура - це агрегатний тип даних, так як може містити в собі різнотипні елементи. Синтаксис оголошення структури в С ++ відрізняється від C. Хоча версія C залишається правильною для C ++. Виходить, що в С ++ можна користуватися двома стилями оголошення структур, а в мові C - тільки однієї. Дивимося синтаксис оголошення структури у мові С:
+				</p>
+				<pre>
+struct Name
+{
+	type atrib;
+	//інші елементи структури  
+} structVar1, structVar2, ...;
+				</pre>
+				<p>
+					де,
+struct - ключове слово, яке починає визначення структури<br/>
+Name - ім'я структури<br/>
+type - тип даних елемента структури<br/>
+atrib - елемент структури<br/>
+structVar1-2 - структурні змінні<br/>
+Оголошення структури завжди повинне починатися з ключового слова struct. Необов'язково, щоб структура мала ім'я, але тоді така структура обов'язково повинна мати структурні змінні, оголошені між закриваючою фігурною дужкою і крапкою з комою. Обов'язково в оголошенні структури повинні бути присутніми фігурні дужки, вони обрамляють тіло структури, в якому оголошуються її атрибути (елементи). Структурні змінні, при оголошенні структури, вказувати необов'язково.<br/>
+Так як структура – це тип даних, то, для того, щоб використовувати цей тип даних, необхідно оголосити структурну змінну, а замість типу даних вказати ім'я структури.
+				</p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Давати кожній створюваній структурі ім’я-етикетку. Ім’я-етикетка структури дозволить оголошувати далі у програмі нові змінні, які належать до цього типу структури.</li>
+					<li>Обдуманий вибір імені-етикетки структури дозволить робити програму само документованою.</li>
+					<li>Рекомендується уникати використовувати однакові імена для елементів структур різного типу. Це не заперечливо, але може призвести до непорозумінь.</li>
+					<li>Не рекомендується вставляти пробіли зліва та справа від знаків операцій та ->. Це допоможе підкреслити, що вираз, в яких містяться дані операції, є іменем одної змінної.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Розглянемо простий приклад, який допоможе познайомитися зі структурами і покаже, як з ними працювати.<br/>
+					Створити масив структур. Кожна структура складається з таких елементів: марка автомобіля, тип (вантажний або легковий), номерний знак, строк служби. Для легкових вказується колір, для вантажних - вантажність. Вивести утворену структуру на екран.
+				</p>
+				<pre>
+#include< iostream >                                         
+#include< iomanip >                                          
+#include< conio.h >                                          
+#include< string.h >                                         
+using namespace std;                                       
+//================== structure's announcing ================
+struct vant{                                               //stucture of trucks
+	char marka[15];                                        //model
+	int vantazh;                                           //capacity
+	char nomer[10];                                        //license plate
+	int strok;                                             //lifetime
+};
+struct leg{                                                //stucture of passenger cars
+	char marka[15];                                        //model
+	char kolir[10];                                        //color
+	char nomer[10];                                        //license plate
+	int strok;                                             //lifetime
+};
+vant vantazhivka[10];                                      //array of trucks
+leg legkov[10];                                            //array of passenger cars
+int n, k;                                                  //number of trucks and passenger cars
+//================== outputting data ===================
+void input()
+{
+	int i = 0;                                             
+	int j = 0;                                             
+	char answer_vant;                                      
+	char answer_leg;                                       
+	cout << "Trucks" << endl;
+	do
+	{                                                      //inputting data of trucks
+		cout << "Model" << endl;
+		cin >> vantazhivka[i].marka;                       //input model
+		cout << "Carrying capacity" << endl;
+		cin >> vantazhivka[i].vantazh;                     //input capacity
+		cout << "License plate" << endl;
+		cin >> vantazhivka[i].nomer;                       //input license plate
+		cout << "Lifetime of this truck" << endl;
+		cin >> vantazhivka[i].strok;                       //input lifetime
+		cout << "continue input y/n" << endl;
+		cin >> answer_vant;
+		i++;                                               //go to the next truck
+	} while (answer_vant != 'n');                          //end of inputing data about trucks
+	n = i;                                                 //number of trucks
+	cout << "Passenger cars" << endl;
+	do
+	{                                                      //inputting data of passenger car
+		cout << "Model" << endl;
+		cin >> legkov[j].marka;                            //input model
+		cout << "Color" << endl;
+		cin >> legkov[j].kolir;                            //input color
+		cout << "License plate" << endl;
+		cin >> legkov[j].nomer;                            //input license plate
+		cout << "Lifetime of this car" << endl;
+		cin >> legkov[j].strok;                            //input lifetime
+		cout << "continue input y/n" << endl;
+		cin >> answer_leg;
+		j++;                                               //go to the next passenger car
+	} while (answer_leg != 'n');                           //end of inputing data about passenger cars 
+	k = j;                                                 //number of passenger cars
+}
+//=============== outputting data ===================
+void output()
+{
+	cout << "Trucks" << endl;
+	cout << "==================================================================" << endl;
+	cout << setw(10) << "Model" << setw(20) << "Carrying capacity" << setw(15) << "License plate" << setw(15) << "Lifetime" << endl;
+	cout << "==================================================================" << endl;
+	for (int i = 0; i < n; i++)                             //outputting data of trucks
+	{
+		cout << setw(10) << vantazhivka[i].marka << setw(10) << vantazhivka[i].vantazh << setw(15) << vantazhivka[i].nomer << setw(15) << vantazhivka[i].strok << endl;
+	}
+	cout << "-----------------------------------------------------------------" << endl;
+	cout << "Passenger cars" << endl;
+	cout << "==================================================================" << endl;
+	cout << setw(10) << "Model" << setw(10) << "Color" << setw(15) << "License plate" << setw(15) << "Lifetime" << endl;
+	cout << "==================================================================" << endl;
+	for (int j = 0; j < k; j++)                             //outputting data of passenger car
+	{
+		cout << setw(10) << legkov[j].marka << setw(10) << legkov[j].kolir << setw(10) << legkov[j].nomer << setw(10) << legkov[j].strok << endl;
+	}
+	cout << "------------------------------------------------------------------" << endl;
+}
+//============= main function =============
+int main()
+{
+	system("color F0");
+	cout << "Structures of trucks and passenger cars and implementation of queries" << endl;
+	cout << "You should input data about trucks and passenger cars" << endl;
+	input();                                                  //inputting data
+	system("cls");
+	cout << "Your data in table" << endl;
+	output();                                                 //outputting data
+	_getch();
+	system("pause");
+}
+
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+				</div>
+
+
+				<h2>
+					Перечислення у мові С(enum)
+				</h2>
+				<p>
+					 І так, що ж таке перечислення або, правильніше сказати, що таке перелічувальні типи у мові С? Тема не з найскладніших. Сама назва - переклад з англійської enumeration. А перераховуються цілі константи.
+				</p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Для імен перелічувальних констант рекомендується використовувати букви тільки верхнього регістру. Це дозволить виділяти їх у тексті програми та буде нагадувати програмісту, що перелічувальні константи – це не змінні.</li>
+					<li>Ідентифікатори в перечисленні повинні мати унікальні імена.</li>
+					<li>Декілька елементів у списку можуть мати одне і те ж ціле значення.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Відразу розглянемо приклад на застосування перелічувань у мові С.<br/>
+Тут ми створимо перелічування level (поверх) і запропонуємо користувачеві проїхатися на віртуальному ліфті по віртуальному торговому центру. Код програми:
+				</p>
+				<pre>
+#include < iostream >
+using namespace std;
+
+//gefine enum
+enum level { PARKING, SUPERMARKET, HARDWARESTORES, BOUTIQUES, SPORTSPA, CLUBRESTAURANTBAR };
+
+int main()
+{	
+	system("color F0");
+
+	level floor = PARKING;                        //value of level type
+	int fl = floor;                                    //user's choice of floor
+	bool exit = true;                               //user's choice - exit and continue
+	cout << "Welcome to our shopping MALL!!!\n";
+	cout << "We are offering you to ride on the elevator and visit all the floors!\n";
+
+	while (exit)                                       //while exit equal true
+	{
+		puts("\nInput number of floor (from 0 to 5): ");
+		cin >> fl;
+
+		switch (fl)
+		{
+		case(PARKING)                         //you are on the 0 floor
+			cout << "\aYou are in the parking!!!" << endl;
+			break;
+
+		case(SUPERMARKET) :                //you are on the 1 floor
+			cout << "\aYou are on the first floor!";
+			cout << "\nThere you can go to the supermarket and buy products or things for home.\n\n";
+			break;
+
+		case(HARDWARESTORES) :           //you are on the 2 floor
+			cout << "\aYou are on the second floor!";
+			cout << "\nThere are technical shops.\n\n";
+			break;
+
+		case(BOUTIQUES) :                   //you are on the 3 floor
+			cout << "\aYou are on the third floor!";
+			cout << "\nThere you can have a shopping! Clothes, shoes, cosmetic shops.\n\n";
+			break;
+
+		case(SPORTSPA) :                    //you are on the 4 floor
+			cout << "\aYou are on the fourth floor!";
+			cout << "\nThere you can go to the swimming pool, rink, gym, or spa-salon!\n\n";
+			break;
+
+		case(CLUBRESTAURANTBAR) :      //you are on the 5 floor
+			cout << "\aYou are on the fifth floor!";
+			cout << "\nYou can go there to the night club, bar or to the restaurant!\n\n";
+			break;
+                                                                    //incorrect input
+		default: cout << "\a\a\aError! We have just floors!\n\n";
+		}
+
+		cout << "If you want to exit on this floor, input 0.\n";
+		cout << "if you want to continue this trop - input 1: ";
+		cin >> exit;
+	}
+	return 0;
+}
+				</pre>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+				<p class="res">
+					Ресурси: http://cppstudio.com/post/8106/
 				</p>
 			</div>
+			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/Structures.zip" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>

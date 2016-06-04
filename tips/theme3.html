@@ -63,18 +63,179 @@
 		<div class="wrapper">
 			<div class="info">
 				<h2>
-					Тут буде теорія
+					Локальні та глобальні змінні у мові С 
 				</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl eget sapien.
+					Кожна змінна має свою зону видимості, тобто таку область, в якій можна працювати зі змінною. За межами цієї області, про змінну нічого відомо не буде, а значить і використовувати її не можна. Отже, змінна знаходиться в області видимості, якщо до неї можна отримати доступ.
+				</p>
+				<p>
+					Існують локальні і глобальні змінні. Так ось, змінні, оголошені всередині функції, називаються локальними. Локальні змінні мають свої області видимості, цими областями є функції, в яких оголошено змінні. Таким чином, в різних функціях можна використовувати змінні з однаковими іменами, що в свою чергу дуже зручно. Поділ змінних на глобальні та локальні відповідає одному з головних правил програмування, а саме - принципом найменших привілеїв. Тобто, змінні, оголошені всередині однієї функції, повинні бути доступні тільки для цієї функції і ні до яких інших, в кінці кінців, вони створювалися саме для цієї функції. Глобальні змінні оголошуються поза тілом будь-якої функції, і тому область видимості таких змінних поширюється на всю програму. Зазвичай глобальні змінні оголошуються перед головною функцією, але можна оголошувати і після функції main (), але тоді ця змінна не буде доступна в функції main ().
+				</p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Передача параметра вимагає часу та місця у стекові для створення копії, кА передається до функції. Глобальним змінним не потрібно цих додаткових ресурсів, так як вони доступні у будь-якому місці програми.</li>
+					<li>В цілому потрібно уникати використовування глобальних змінних, за виключенням деяких ситуацій з унікальними вимогами до продуктивності.</li>
+					<li>Змінні, які використовуються лише у певній функції, повинні бути оголошені локальними змінними у цій функції, а не зовнішніми змінними.</li>
+				</ul>
+
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Розробимо програму, в якій будуть оголошені дві змінні, локальна і глобальна, з однаковим ім'ям.
+				</p>
+				<pre>
+//defines the entry point for the console application
+#include < iostream >
+using namespace std;
+
+void example();
+int variable = 48; //initialization of a global variable
+
+int main()
+{
+	system("color F0");
+	int variable = 12; //initialization of a local variable
+	cout << "local  variable = " << variable << endl; //printing value contained in the local variable
+	example(); //function start
+	system("pause");
+}
+
+void example()
+{
+	cout << "global variable = " << variable << endl; //function sees only the global variable
+}
+
+				</pre>
+</div>
+				<h2>
+					Покажчики
+				</h2>
+				<p>
+					Покажчик - змінна, значенням якої є адреса комірки пам'яті. Тобто покажчик посилається на блок даних з області пам'яті, причому на саме його початок. Покажчик може посилатися на змінну або функцію. Для цього потрібно знати адресу змінної або функції. Так ось, щоб дізнатися адресу конкретної змінної в С існує унарна операція взяття адреси &. Така операція витягує адресу оголошених змінних, для того, щоб його привласнити покажчику.<br/>
+Покажчики використовуються для передачі по посиланню даних, що набагато прискорює процес обробки цих даних (в тому випадку, якщо обсяг даних великий), так як їх не треба копіювати, як при передачі за значенням, тобто, використовуючи ім'я змінної. В основному покажчики використовуються для організації динамічного розподілу пам'яті, наприклад при оголошенні масиву, не треба буде його обмежувати в розмірі. Адже програміст заздалегідь не може знати, якого розміру потрібен масив того чи іншого користувачеві, в такому випадку використовується динамічне виділення пам'яті під масив. Будь-покажчик необхідно оголосити перед використанням, як і будь-яку змінну.<br/>
+Принцип оголошення покажчиків такий же, як і принцип оголошення змінних. Відмінність полягає лише в тому, що перед ім'ям ставиться символ зірочки *. Візуально покажчики відрізняються від змінних тільки одним символом. При оголошенні покажчиків компілятор виділяє кілька байт пам'яті, в залежності від типу даних відводяться для зберігання деякої інформації в пам'яті. Щоб отримати значення, записане в деякій області, на яке посилається покажчик потрібно скористатися операцією разименованія покажчика *. Необхідно поставити зірочку перед ім'ям і отримаємо доступ до значення покажчика.
+				</p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Включайте в імена змінних_покажчиків префікс(чи суфікс) ptr; такі імена підкажуть вам, що ці змінні є покажчиками і повинні оброблюватися відповідним чином.</li>
+					<li>Щоб уникнути небажаних результатів завжди ініціалізуйте покажчики.</li>
+					<li>
+						Використовуйте виклик за посиланням тільки у тому випадку, коли функція, що викликається повинна змінювати аргумент, який передається.					</li>
+				</ul>
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Розробимо програму, яка буде порівнювати адреси покажчиків.
+				</p>
+				<pre>
+#include < iostream >
+using namespace std;
+
+int main()
+{
+	system("color F0");
+	int var1 = 123;                             //initializing the variable var1 number 123
+	int var2 = 99;                              //initializing the variable var2 number 99
+	int *ptrvar1 = &var1;                       //a pointer to the variable var1
+	int *ptrvar2 = &var2;                       //a pointer to the variable var2
+	cout << "var1    = " << var1 << endl;
+	cout << "var2    = " << var2 << endl;
+	cout << "ptrvar1 = " << ptrvar1 << endl;
+	cout << "ptrvar2 = " << ptrvar2 << endl;
+	if (ptrvar1 > ptrvar2)                      //we compare the values of pointers, ie variables addresses
+		cout << "ptrvar1 > ptrvar2" << endl;
+	if (*ptrvar1 > *ptrvar2)                    //we compare the values of variables that are referenced by pointers
+		cout << "*ptrvar1 > *ptrvar2" << endl;
+	system("pause");
+}
+				</pre>
+</div>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+
+				<h2>
+					Модифікатор Const у мові С
+				</h2>
+				<p>
+					Модифікатор типу const (від анг type qualifier) - pарезервоване ключове слово у мові програмування С, яке не дає модифікувати значення змінних. Звідси і виникло в програмуванні таке поняття, як константи або константні змінні, тобто незмінні. Необхідно запам'ятати, що при оголошенні константи, її потрібно ініціалізувати.<br/>
+// Синтаксис оголошення константи<br/>
+Const / * тип даних * / / * ім'я змінної * / = / * ініціалізатор (значення) * /; // Оголошення константної змінної<br/>
+Оголошення константної змінної від звичайної змінної відрізняється ключовим словом const, яке ставиться перед типом даних оголошення змінної. Розглянемо фрагмент коду оголошення константній змінної.<br/>
+// Оголошення і ініціалізація константній змінної типу INT з ім'ям значення<br/>
+const int value = 8;<br/>
+Значення Const = 8;<br/>
+Була оголошена константа цілого типу з іменем і ініціалізована значенням 8.
+
+				</p>
+				<h3>
+					Гарний стиль програмування
+				</h3>
+				<ul class="main-info">
+					<li>Перевага використання змінних з модифікатором const замість символічних констант є те, що змінні з модифікатором const видимі для символічного налаштувальника; константи, визначені за допомогою #define, для нього невидимі.</li>
+				</ul>
+				<div class="example">
+					<h3>
+					Приклад програми
+				</h3>
+				<p>
+					Умова задачі: Маємо певне стале значення виразу, у нашому випадку – це швидкість, яку не можна перевищувати і три швидкості: 85, 95, 100. Визначити штраф, який заплатить водій, проїхавши крізь дану дорогу з лімітом швидкості.
+				</p>
+				<pre>
+//Using constants
+#include < stdio.h >
+#include < iostream >
+const int SPEEDLIMIT = 55;
+const int RATE = 15;
+const int FIRST_TICKET = 85;
+const int SECOND_TICKET= 95;
+const int THIRD_TICKET = 100;
+int main()
+{
+	system("color F0");
+	int total, fine, speeding;
+	total = 0;
+	puts("Speeding Tickets\n");
+	/* first ticket */
+	speeding = FIRST_TICKET - SPEEDLIMIT;
+	fine = speeding * RATE;
+	total = total + fine;
+	printf("For going %d in a %d zone: $%d\n", FIRST_TICKET, SPEEDLIMIT, fine);
+	/* second ticket */
+	speeding = SECOND_TICKET - SPEEDLIMIT;
+	fine = speeding * RATE;
+	total = total + fine;
+	printf("For going %d in a %d zone: $%d\n", SECOND_TICKET, SPEEDLIMIT, fine);
+	/* third ticket */
+	speeding = THIRD_TICKET - SPEEDLIMIT;
+	fine = speeding * RATE;
+	total = total + fine;
+	printf("For going %d in a %d zone: $%d\n", THIRD_TICKET, SPEEDLIMIT, fine);
+	/* Display total */
+	printf("\nTotal in fines: $%d\n", total);
+	system("pause");
+}
+
+				</pre>
+</div>
+				<p>
+					Завантажте "Аналіз коду" для подробиць.
+				</p>
+				<p class="res">
+					Ресурси: http://cppstudio.com/post/394/
+					<br/>http://cppstudio.com/post/415/
 				</p>
 			</div>
 			<div class="buttons">
-				<a href="#" class="code button" download>
-					Завантажити приклад коду
-				</a>
-				<a href="#" class="review button" download>
+				<a href="../material/Variables.zip" class="review button" download>
 					Аналіз коду
 				</a>
 			</div>
